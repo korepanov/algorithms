@@ -41,26 +41,26 @@ func merge(arr []int) {
 	}
 }
 
-func mergeSort(arr []int) {
+func MergeSort(arr []int) {
 	i := len(arr) / 2
 	if i > 0 {
-		mergeSort(arr[:i])
-		mergeSort(arr[i:])
+		MergeSort(arr[:i])
+		MergeSort(arr[i:])
 		merge(arr)
 	}
 }
 
-func mergeSortParallel(arr []int) {
+func MergeSortParallel(arr []int) {
 	i := len(arr) / 2
 	if i > 0 {
 		var wd sync.WaitGroup
 		wd.Add(2)
 		go func() {
-			mergeSortParallel(arr[:i])
+			MergeSortParallel(arr[:i])
 			wd.Done()
 		}()
 		go func() {
-			mergeSortParallel(arr[i:])
+			MergeSortParallel(arr[i:])
 			wd.Done()
 		}()
 		wd.Wait()

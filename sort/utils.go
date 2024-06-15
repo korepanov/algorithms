@@ -59,3 +59,15 @@ func benchmarkSort(b *testing.B, testFunc func(arr []int)) {
 		testFunc(arr)
 	}
 }
+
+func BenchmarkSortWithSize(b *testing.B, testFunc func(arr []int), arrSize int) {
+	for i := 0; i < b.N; i++ {
+		b.StopTimer()
+		arr := make([]int, arrSize, arrSize)
+		for j := range arr {
+			arr[j] = rand.Intn(arrSize) + 1
+		}
+		b.StartTimer()
+		testFunc(arr)
+	}
+}
